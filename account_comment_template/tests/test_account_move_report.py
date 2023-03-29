@@ -15,7 +15,6 @@ class TestAccountInvoiceReport(AccountTestInvoicingCommon):
     def setUpClass(cls, chart_template_ref=None):
         super().setUpClass(chart_template_ref=chart_template_ref)
         cls.base_comment_model = cls.env["base.comment.template"]
-        cls.move_obj = cls.env.ref("account.model_account_move")
         cls.before_comment = cls._create_comment(cls, position="before_lines")
         cls.after_comment = cls._create_comment(cls, position="after_lines")
         cls.partner_a.base_comment_template_ids = [
@@ -33,7 +32,7 @@ class TestAccountInvoiceReport(AccountTestInvoicingCommon):
                 "company_id": self.company_data["company"].id,
                 "position": position,
                 "text": "Text " + position,
-                "model_ids": [(6, 0, self.move_obj.ids)],
+                "models": "account.move",
             }
         )
 
